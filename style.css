@@ -437,3 +437,12 @@ body{
 .completed-task h3{
     text-decoration:line-through;
 }
+.restore-btn{
+    background:#2563eb;
+    color:white;
+}
+
+.delete-forever-btn{
+    background:#dc2626;
+    color:white;
+}
