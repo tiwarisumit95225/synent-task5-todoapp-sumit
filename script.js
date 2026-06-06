@@ -6,6 +6,7 @@ let tasks = [];
 let selectedTaskId = null;
 let editTaskId = null;
 let currentFilter = "all";
+
 let searchTerm = "";
 
 
@@ -74,8 +75,7 @@ const elements = {
     filters:
         document.querySelector(".filters"),
 
-    emptyState:
-        document.querySelector(".empty-state"),
+   
     searchInput:
         document.getElementById("searchInput"),
     allFilter:
@@ -103,6 +103,9 @@ const elements = {
 
     cancelEditBtn:
         document.getElementById("cancelEditBtn"),
+    themeToggle:
+        document.getElementById("themeToggle"),
+  
 
 };
 // =========================
@@ -135,6 +138,12 @@ function createTaskObject() {
     const priority = elements.priority.value;
 
     const dueDate = elements.dueDate.value;
+    if (!dueDate) {
+
+    alert("Please select a due date");
+
+    return null;
+}
 
     if (!title) {
 
@@ -182,7 +191,7 @@ function resetForm() {
 // =========================
 
 function renderTask(task) {
-
+   
     elements.taskContainer.innerHTML += `
 
   <div class="task-card ${task.completed ? "completed-task" : ""}" data-id="${task.id}">
@@ -193,7 +202,7 @@ function renderTask(task) {
 
             <p>🔴 Priority: ${task.priority}</p>
 
-            <p>📅 Due: ${formatDate(task.dueDate)}</p>
+         <p>📅 Due: ${formatDate(task.dueDate)}</p>
 
             <p>🕒 Created: ${formatDate(task.createdDate)}</p>
 
@@ -264,6 +273,8 @@ function renderAllTasks() {
                 task.completed;
 
         }
+
+       
 
         if (matchesSearch && matchesFilter) {
 
@@ -359,6 +370,7 @@ function showTasksTab() {
     elements.tasksTab.classList.add("active");
 
     elements.recycleTab.classList.remove("active");
+   
 
 }
 
@@ -384,7 +396,7 @@ function showRecycleBinTab() {
     elements.tasksTab.classList.remove("active");
 
     elements.recycleTab.classList.add("active");
-
+   
 }
 // =========================
 // MOVE TO RECYCLE BIN
@@ -456,7 +468,7 @@ function attachRestoreEvents() {
     });
 
 }
-function attachEditEvents(){
+function attachEditEvents() {
 
     const editButtons =
         document.querySelectorAll(".edit-btn");
@@ -479,13 +491,13 @@ function attachEditEvents(){
 // OPEN EDIT MODAL
 // =========================
 
-function openEditModal(taskId){
+function openEditModal(taskId) {
 
     const task = tasks.find(
         task => task.id === taskId
     );
 
-    if(!task) return;
+    if (!task) return;
 
     editTaskId = taskId;
 
@@ -506,19 +518,19 @@ function openEditModal(taskId){
 // SAVE EDIT
 // =========================
 
-function saveEditedTask(){
-    if(!elements.editTaskName.value.trim()){
+function saveEditedTask() {
+    if (!elements.editTaskName.value.trim()) {
 
-    alert("Task title cannot be empty");
+        alert("Task title cannot be empty");
 
-    return;
-}
+        return;
+    }
 
     const task = tasks.find(
         task => task.id === editTaskId
     );
 
-    if(!task) return;
+    if (!task) return;
 
     task.title =
         elements.editTaskName.value.trim();
@@ -830,7 +842,7 @@ function loadTasks() {
     updateDashboard();
 
 }
-loadTasks();
+
 // =========================
 // COMPLETE MODAL EVENTS
 // =========================
@@ -885,20 +897,86 @@ elements.completedFilter
         setFilter("completed");
 
     });
-    // =========================
+// =========================
 // EDIT MODAL EVENTS
 // =========================
 
 elements.cancelEditBtn
-.addEventListener("click", () => {
+    .addEventListener("click", () => {
 
-    elements.editModal
-        .classList.add("hidden");
+        elements.editModal
+            .classList.add("hidden");
 
-});
+    });
 elements.saveEditBtn
-.addEventListener("click", () => {
+    .addEventListener("click", () => {
 
-    saveEditedTask();
+        saveEditedTask();
 
-});
+    });
+function updateThemeButton(){
+
+    const icon =
+        elements.themeToggle.querySelector("i");
+
+    if(document.body.classList.contains("light-theme")){
+
+        icon.className =
+            "fa-solid fa-sun";
+
+    }else{
+
+        icon.className =
+            "fa-solid fa-moon";
+
+    }
+
+}
+// =========================
+// THEME TOGGLE
+// =========================
+
+function toggleTheme(){
+
+    document.body.classList.toggle(
+        "light-theme"
+    );
+
+    const isLightTheme =
+        document.body.classList.contains(
+            "light-theme"
+        );
+
+    localStorage.setItem(
+        "theme",
+        isLightTheme ? "light" : "dark"
+    );
+
+    updateThemeButton();
+
+}
+elements.themeToggle
+    .addEventListener("click", () => {
+
+        toggleTheme();
+
+    });
+function loadTheme(){
+
+    const savedTheme =
+        localStorage.getItem("theme");
+
+    if(savedTheme === "light"){
+
+        document.body.classList.add(
+            "light-theme"
+        );
+
+    }
+
+    updateThemeButton();
+
+}
+
+loadTasks();
+loadTheme();
