@@ -90,8 +90,7 @@ Add screenshots of:
 
 Add your deployed project link here:
 
-
-https://your-live-demo-link.com
+https://tiwarisumit95225.github.io/synent-task5-todoapp-sumit/
 
 
 ## GitHub Repository
