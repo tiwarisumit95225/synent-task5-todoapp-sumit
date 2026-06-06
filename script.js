@@ -4,6 +4,7 @@
 
 let tasks = [];
 let selectedTaskId = null;
+let editTaskId = null;
 let currentFilter = "all";
 let searchTerm = "";
 
@@ -85,6 +86,23 @@ const elements = {
 
     completedFilter:
         document.getElementById("completedFilter"),
+    editModal:
+        document.getElementById("editModal"),
+
+    editTaskName:
+        document.getElementById("editTaskName"),
+
+    editPriority:
+        document.getElementById("editPriority"),
+
+    editDueDate:
+        document.getElementById("editDueDate"),
+
+    saveEditBtn:
+        document.getElementById("saveEditBtn"),
+
+    cancelEditBtn:
+        document.getElementById("cancelEditBtn"),
 
 };
 // =========================
@@ -183,7 +201,9 @@ function renderTask(task) {
 
         <div class="task-actions">
 
-            <button class="edit-btn">
+            <button
+    class="edit-btn"
+    data-id="${task.id}">
                 ✏ Edit
             </button>
 
@@ -255,7 +275,7 @@ function renderAllTasks() {
 
     attachCompleteEvents();
     attachDeleteEvents();
-
+    attachEditEvents();
 
 }
 // =========================
@@ -434,6 +454,89 @@ function attachRestoreEvents() {
         });
 
     });
+
+}
+function attachEditEvents(){
+
+    const editButtons =
+        document.querySelectorAll(".edit-btn");
+
+    editButtons.forEach(button => {
+
+        button.addEventListener("click", () => {
+
+            const taskId =
+                Number(button.dataset.id);
+
+            openEditModal(taskId);
+
+        });
+
+    });
+
+}
+// =========================
+// OPEN EDIT MODAL
+// =========================
+
+function openEditModal(taskId){
+
+    const task = tasks.find(
+        task => task.id === taskId
+    );
+
+    if(!task) return;
+
+    editTaskId = taskId;
+
+    elements.editTaskName.value =
+        task.title;
+
+    elements.editPriority.value =
+        task.priority;
+
+    elements.editDueDate.value =
+        task.dueDate;
+
+    elements.editModal
+        .classList.remove("hidden");
+
+}
+// =========================
+// SAVE EDIT
+// =========================
+
+function saveEditedTask(){
+    if(!elements.editTaskName.value.trim()){
+
+    alert("Task title cannot be empty");
+
+    return;
+}
+
+    const task = tasks.find(
+        task => task.id === editTaskId
+    );
+
+    if(!task) return;
+
+    task.title =
+        elements.editTaskName.value.trim();
+
+    task.priority =
+        elements.editPriority.value;
+
+    task.dueDate =
+        elements.editDueDate.value;
+
+    saveTasks();
+
+    renderAllTasks();
+
+    updateDashboard();
+
+    elements.editModal
+        .classList.add("hidden");
 
 }
 // =========================
@@ -782,3 +885,20 @@ elements.completedFilter
         setFilter("completed");
 
     });
+    // =========================
+// EDIT MODAL EVENTS
+// =========================
+
+elements.cancelEditBtn
+.addEventListener("click", () => {
+
+    elements.editModal
+        .classList.add("hidden");
+
+});
+elements.saveEditBtn
+.addEventListener("click", () => {
+
+    saveEditedTask();
+
+});
