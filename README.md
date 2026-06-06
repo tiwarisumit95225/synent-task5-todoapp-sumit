@@ -78,17 +78,28 @@ No installation or additional dependencies are required.
 
 ## Screenshots
 
-Add screenshots of:
 
-* Dashboard
-* Task Management
-* Light Theme
-* Dark Theme
-* Recycle Bin
+
+### Dashboard
+
+![Dashboard](assets/screenshot/dashboard.png)
+
+### Task Management
+
+![Tasks](assets/screenshot/taskmanagement.png)
+
+### Light Theme
+
+![Light Theme](assets/screenshot/lighttheme.png)
+
+### Recycle bin
+
+![Recycle bin](assets/screenshot/recycle.png)
+
 
 ## Live Demo
 
-Add your deployed project link here:
+
 
 https://tiwarisumit95225.github.io/synent-task5-todoapp-sumit/
 
