@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Smart To-Do Manager</title>
 
     <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
 
     <!-- Font Awesome -->
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
     <div class="container">
@@ -89,11 +91,7 @@
         <!-- Add Task Form -->
         <section class="task-form">
 
-            <input
-                type="text"
-                id="taskInput"
-                placeholder="Enter task title..."
-            >
+            <input type="text" id="taskInput" placeholder="Enter task title...">
 
             <select id="priority">
                 <option value="High">🔴 High Priority</option>
@@ -116,11 +114,7 @@
             <div class="search-box">
                 <i class="fa-solid fa-magnifying-glass"></i>
 
-                <input
-                    type="text"
-                    id="searchInput"
-                    placeholder="Search tasks..."
-                >
+                <input type="text" id="searchInput" placeholder="Search tasks...">
             </div>
 
         </section>
@@ -128,15 +122,15 @@
         <!-- Filters -->
         <section class="filters">
 
-            <button class="filter-btn active">
+            <button class="filter-btn active" id="allFilter">
                 All
             </button>
 
-            <button class="filter-btn">
+            <button class="filter-btn" id="pendingFilter">
                 Pending
             </button>
 
-            <button class="filter-btn">
+            <button class="filter-btn" id="completedFilter">
                 Completed
             </button>
 
@@ -221,10 +215,7 @@
 
             <h2>Complete Task</h2>
 
-            <textarea
-                id="completionNote"
-                placeholder="Add completion note (optional)"
-            ></textarea>
+            <textarea id="completionNote" placeholder="Add completion note (optional)"></textarea>
 
             <div class="modal-buttons">
 
@@ -245,4 +236,5 @@
     <script src="script.js"></script>
 
 </body>
+
 </html>

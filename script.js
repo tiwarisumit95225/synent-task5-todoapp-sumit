@@ -4,6 +4,8 @@
 
 let tasks = [];
 let selectedTaskId = null;
+let currentFilter = "all";
+let searchTerm = "";
 
 
 // =========================
@@ -73,6 +75,16 @@ const elements = {
 
     emptyState:
         document.querySelector(".empty-state"),
+    searchInput:
+        document.getElementById("searchInput"),
+    allFilter:
+        document.getElementById("allFilter"),
+
+    pendingFilter:
+        document.getElementById("pendingFilter"),
+
+    completedFilter:
+        document.getElementById("completedFilter"),
 
 };
 // =========================
@@ -210,7 +222,30 @@ function renderAllTasks() {
 
     sortedTasks.forEach(task => {
 
-        if (!task.deleted) {
+        if (task.deleted) return;
+
+        const matchesSearch =
+            task.title
+                .toLowerCase()
+                .includes(searchTerm.toLowerCase());
+
+        let matchesFilter = true;
+
+        if (currentFilter === "pending") {
+
+            matchesFilter =
+                !task.completed;
+
+        }
+
+        if (currentFilter === "completed") {
+
+            matchesFilter =
+                task.completed;
+
+        }
+
+        if (matchesSearch && matchesFilter) {
 
             renderTask(task);
 
@@ -274,10 +309,10 @@ function renderRecycleBin() {
         `;
 
     });
-    
-attachRestoreEvents();
 
-attachDeleteForeverEvents();
+    attachRestoreEvents();
+
+    attachDeleteForeverEvents();
 }
 
 
@@ -405,7 +440,7 @@ function attachRestoreEvents() {
 // DELETE FOREVER
 // =========================
 
-function deleteForever(taskId){
+function deleteForever(taskId) {
 
     tasks = tasks.filter(
         task => task.id !== taskId
@@ -426,7 +461,7 @@ function deleteForever(taskId){
 // DELETE FOREVER EVENTS
 // =========================
 
-function attachDeleteForeverEvents(){
+function attachDeleteForeverEvents() {
 
     const buttons =
         document.querySelectorAll(
@@ -555,15 +590,17 @@ elements.addTaskBtn.addEventListener("click", () => {
 function updateEmptyState() {
 
     const activeTasks =
-    tasks.filter(task => !task.deleted);
+        tasks.filter(task => !task.deleted);
 
-if(activeTasks.length === 0) {
+    if (activeTasks.length === 0) {
 
-        elements.emptyState.classList.remove("hidden");
+        elements.emptyState
+            .classList.remove("hidden");
 
     } else {
 
-        elements.emptyState.classList.add("hidden");
+        elements.emptyState
+            .classList.add("hidden");
 
     }
 
@@ -633,6 +670,43 @@ function saveTasks() {
     );
 
 }
+function setFilter(filter) {
+
+    currentFilter = filter;
+
+    elements.allFilter
+        .classList.remove("active");
+
+    elements.pendingFilter
+        .classList.remove("active");
+
+    elements.completedFilter
+        .classList.remove("active");
+
+    if (filter === "all") {
+
+        elements.allFilter
+            .classList.add("active");
+
+    }
+
+    if (filter === "pending") {
+
+        elements.pendingFilter
+            .classList.add("active");
+
+    }
+
+    if (filter === "completed") {
+
+        elements.completedFilter
+            .classList.add("active");
+
+    }
+
+    renderAllTasks();
+
+}
 // =========================
 // LOAD TASKS
 // =========================
@@ -679,3 +753,32 @@ elements.tasksTab
 
 elements.recycleTab
     .addEventListener("click", showRecycleBinTab);
+elements.searchInput
+    .addEventListener("input", () => {
+
+        searchTerm =
+            elements.searchInput.value;
+
+        renderAllTasks();
+
+    });
+elements.allFilter
+    .addEventListener("click", () => {
+
+        setFilter("all");
+
+    });
+
+elements.pendingFilter
+    .addEventListener("click", () => {
+
+        setFilter("pending");
+
+    });
+
+elements.completedFilter
+    .addEventListener("click", () => {
+
+        setFilter("completed");
+
+    });
