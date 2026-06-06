@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart To-Do Manager</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- Header -->
+        <header class="header">
+            <div class="logo-section">
+                <i class="fa-solid fa-list-check"></i>
+                <h1>Smart To-Do Manager</h1>
+            </div>
+
+            <button id="themeToggle">
+                <i class="fa-solid fa-moon"></i>
+            </button>
+        </header>
+
+        <!-- Navigation Tabs -->
+        <div class="tabs">
+            <button class="tab-btn active" id="tasksTab">
+                <i class="fa-solid fa-list"></i>
+                Tasks
+            </button>
+
+            <button class="tab-btn" id="recycleTab">
+                <i class="fa-solid fa-trash"></i>
+                Recycle Bin
+            </button>
+        </div>
+
+        <!-- Dashboard -->
+        <section class="dashboard">
+
+            <div class="card">
+                <i class="fa-solid fa-clipboard-list"></i>
+                <h3>Total Tasks</h3>
+                <span id="totalTasks">0</span>
+            </div>
+
+            <div class="card">
+                <i class="fa-solid fa-hourglass-half"></i>
+                <h3>Pending</h3>
+                <span id="pendingTasks">0</span>
+            </div>
+
+            <div class="card">
+                <i class="fa-solid fa-circle-check"></i>
+                <h3>Completed</h3>
+                <span id="completedTasks">0</span>
+            </div>
+
+            <div class="card">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <h3>Overdue</h3>
+                <span id="overdueTasks">0</span>
+            </div>
+
+        </section>
+
+        <!-- Progress Section -->
+        <section class="progress-section">
+
+            <div class="progress-info">
+                <span>Progress</span>
+                <span id="progressPercentage">0%</span>
+            </div>
+
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+
+        </section>
+
+        <!-- Add Task Form -->
+        <section class="task-form">
+
+            <input
+                type="text"
+                id="taskInput"
+                placeholder="Enter task title..."
+            >
+
+            <select id="priority">
+                <option value="High">🔴 High Priority</option>
+                <option value="Medium">🟡 Medium Priority</option>
+                <option value="Low">🟢 Low Priority</option>
+            </select>
+
+            <input type="date" id="dueDate">
+
+            <button id="addTaskBtn">
+                <i class="fa-solid fa-plus"></i>
+                Add Task
+            </button>
+
+        </section>
+
+        <!-- Search -->
+        <section class="search-section">
+
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search tasks..."
+                >
+            </div>
+
+        </section>
+
+        <!-- Filters -->
+        <section class="filters">
+
+            <button class="filter-btn active">
+                All
+            </button>
+
+            <button class="filter-btn">
+                Pending
+            </button>
+
+            <button class="filter-btn">
+                Completed
+            </button>
+
+        </section>
+
+        <!-- Empty State -->
+        <section class="empty-state">
+
+            <i class="fa-solid fa-clipboard"></i>
+
+            <h2>Welcome to Smart To-Do Manager</h2>
+
+            <p>
+                Organize your work with priorities,
+                deadlines and progress tracking.
+            </p>
+
+            <button class="start-btn">
+                Create Your First Task
+            </button>
+
+        </section>
+
+        <!-- Task List -->
+        <section id="taskContainer">
+
+            <!-- Dynamic Tasks Here -->
+
+        </section>
+
+        <!-- Recycle Bin -->
+        <section id="recycleBinSection" class="hidden">
+
+            <h2>
+                <i class="fa-solid fa-trash"></i>
+                Recycle Bin
+            </h2>
+
+            <div id="deletedTasksContainer">
+
+            </div>
+
+        </section>
+
+    </div>
+
+    <!-- Edit Modal -->
+    <div class="modal hidden" id="editModal">
+
+        <div class="modal-content">
+
+            <h2>Edit Task</h2>
+
+            <input type="text" id="editTaskName">
+
+            <select id="editPriority">
+                <option>High</option>
+                <option>Medium</option>
+                <option>Low</option>
+            </select>
+
+            <input type="date" id="editDueDate">
+
+            <div class="modal-buttons">
+                <button id="saveEditBtn">
+                    Save
+                </button>
+
+                <button id="cancelEditBtn">
+                    Cancel
+                </button>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Complete Task Modal -->
+    <div class="modal hidden" id="completeModal">
+
+        <div class="modal-content">
+
+            <h2>Complete Task</h2>
+
+            <textarea
+                id="completionNote"
+                placeholder="Add completion note (optional)"
+            ></textarea>
+
+            <div class="modal-buttons">
+
+                <button id="confirmCompleteBtn">
+                    Complete
+                </button>
+
+                <button id="cancelCompleteBtn">
+                    Cancel
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
