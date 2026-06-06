@@ -1,0 +1,292 @@
+/* =========================
+   RESET
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+
+    --bg-color:#0f172a;
+    --card-color:#1e293b;
+    --border-color:#334155;
+
+    --text-primary:#f8fafc;
+    --text-secondary:#94a3b8;
+
+    --primary:#3b82f6;
+    --success:#22c55e;
+    --warning:#f59e0b;
+    --danger:#ef4444;
+
+    --radius:16px;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    background:var(--bg-color);
+    color:var(--text-primary);
+    min-height:100vh;
+    padding:20px;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+}
+
+.logo-section{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.logo-section i{
+    color:var(--primary);
+    font-size:1.8rem;
+}
+
+.logo-section h1{
+    font-size:1.5rem;
+}
+
+#themeToggle{
+    background:var(--card-color);
+    color:white;
+    border:none;
+    width:50px;
+    height:50px;
+    border-radius:50%;
+    cursor:pointer;
+}
+
+/* =========================
+   TABS
+========================= */
+
+.tabs{
+    display:flex;
+    gap:10px;
+    margin-bottom:25px;
+}
+
+.tab-btn{
+    flex:1;
+    border:none;
+    cursor:pointer;
+    background:var(--card-color);
+    color:white;
+    padding:14px;
+    border-radius:var(--radius);
+    font-weight:500;
+}
+
+.tab-btn.active{
+    background:var(--primary);
+}
+
+/* =========================
+   DASHBOARD
+========================= */
+
+.dashboard{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+    margin-bottom:25px;
+}
+
+.card{
+    background:var(--card-color);
+    padding:20px;
+    border-radius:var(--radius);
+    border:1px solid var(--border-color);
+}
+
+.card h3{
+    font-size:0.95rem;
+    margin:10px 0;
+}
+
+.card span{
+    font-size:1.8rem;
+    font-weight:700;
+}
+
+.card i{
+    color:var(--primary);
+}
+/* =========================
+   PROGRESS SECTION
+========================= */
+
+.progress-section{
+    margin-bottom:25px;
+}
+
+.progress-info{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:10px;
+    font-weight:500;
+}
+
+.progress-bar{
+    width:100%;
+    height:12px;
+    background:var(--card-color);
+    border-radius:999px;
+    overflow:hidden;
+}
+
+.progress-fill{
+    width:0%;
+    height:100%;
+    background:var(--primary);
+    border-radius:999px;
+}
+/* =========================
+   TASK FORM
+========================= */
+
+.task-form{
+    display:grid;
+    gap:12px;
+    margin-bottom:25px;
+}
+
+.task-form input,
+.task-form select{
+    background:var(--card-color);
+    color:var(--text-primary);
+    border:1px solid var(--border-color);
+    padding:14px;
+    border-radius:var(--radius);
+    outline:none;
+}
+
+.task-form button{
+    background:var(--primary);
+    color:white;
+    border:none;
+    padding:14px;
+    border-radius:var(--radius);
+    cursor:pointer;
+    font-weight:600;
+}
+/* =========================
+   SEARCH
+========================= */
+
+.search-section{
+    margin-bottom:20px;
+}
+
+.search-box{
+    background:var(--card-color);
+    border:1px solid var(--border-color);
+    border-radius:var(--radius);
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:14px;
+}
+
+.search-box input{
+    width:100%;
+    border:none;
+    background:transparent;
+    color:white;
+    outline:none;
+}
+
+.search-box i{
+    color:var(--text-secondary);
+}
+/* =========================
+   FILTERS
+========================= */
+
+.filters{
+    display:flex;
+    gap:10px;
+    margin-bottom:25px;
+}
+
+.filter-btn{
+    flex:1;
+    border:none;
+    cursor:pointer;
+    padding:12px;
+    border-radius:var(--radius);
+    background:var(--card-color);
+    color:white;
+}
+
+.filter-btn.active{
+    background:var(--primary);
+}
+/* =========================
+   EMPTY STATE
+========================= */
+
+.empty-state{
+    text-align:center;
+    background:var(--card-color);
+    border:1px solid var(--border-color);
+    border-radius:var(--radius);
+    padding:40px 20px;
+    margin-bottom:25px;
+}
+
+.empty-state i{
+    font-size:3rem;
+    color:var(--primary);
+    margin-bottom:15px;
+}
+
+.empty-state h2{
+    margin-bottom:10px;
+}
+
+.empty-state p{
+    color:var(--text-secondary);
+    margin-bottom:20px;
+}
+
+.start-btn{
+    background:var(--primary);
+    color:white;
+    border:none;
+    padding:12px 20px;
+    border-radius:var(--radius);
+    cursor:pointer;
+}
+.hidden{
+    display:none;
+}
+@media(min-width:768px){
+
+    .task-form{
+        grid-template-columns:
+        2fr
+        1fr
+        1fr
+        auto;
+    }
+
+}
