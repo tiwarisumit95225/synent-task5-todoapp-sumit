@@ -138,6 +138,7 @@ elements.addTaskBtn.addEventListener("click", () => {
 
     if(!task) return;
 tasks.push(task);
+saveTasks();
 
 renderTask(task);
 updateEmptyState();
@@ -162,3 +163,36 @@ function updateEmptyState(){
     }
 
 }
+// =========================
+// SAVE TASKS
+// =========================
+
+function saveTasks(){
+
+    localStorage.setItem(
+        "smartTodoTasks",
+        JSON.stringify(tasks)
+    );
+
+}
+// =========================
+// LOAD TASKS
+// =========================
+
+function loadTasks(){
+
+    const storedTasks =
+        localStorage.getItem("smartTodoTasks");
+
+    if(!storedTasks) return;
+
+    tasks = JSON.parse(storedTasks);
+
+    tasks.forEach(task => {
+        renderTask(task);
+    });
+
+    updateEmptyState();
+
+}
+loadTasks();
