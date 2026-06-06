@@ -158,6 +158,9 @@ body{
     height:100%;
     background:var(--primary);
     border-radius:999px;
+
+    transition:0.3s ease;
+
 }
 /* =========================
    TASK FORM
@@ -340,4 +343,97 @@ body{
 .delete-btn{
     background:var(--danger);
     color:white;
+}
+/* =========================
+   MODAL
+========================= */
+
+.modal{
+    position:fixed;
+    inset:0;
+
+    background:rgba(0,0,0,0.7);
+
+    justify-content:center;
+    align-items:center;
+
+    z-index:1000;
+}
+.modal:not(.hidden){
+    display:flex;
+}
+
+.modal-content{
+
+    width:90%;
+    max-width:500px;
+
+    background:var(--card-color);
+
+    padding:25px;
+
+    border-radius:var(--radius);
+
+    border:1px solid var(--border-color);
+
+}
+
+.modal-content h2{
+    margin-bottom:20px;
+}
+
+.modal-content textarea{
+
+    width:100%;
+    min-height:120px;
+
+    background:var(--bg-color);
+
+    color:white;
+
+    border:1px solid var(--border-color);
+
+    border-radius:12px;
+
+    padding:12px;
+
+    resize:none;
+
+    margin-bottom:20px;
+}
+
+.modal-buttons{
+
+    display:flex;
+    gap:10px;
+}
+
+.modal-buttons button{
+
+    flex:1;
+
+    border:none;
+
+    padding:12px;
+
+    border-radius:12px;
+
+    cursor:pointer;
+}
+
+#confirmCompleteBtn{
+    background:var(--success);
+    color:white;
+}
+
+#cancelCompleteBtn{
+    background:var(--danger);
+    color:white;
+}
+.completed-task{
+    opacity:0.6;
+}
+
+.completed-task h3{
+    text-decoration:line-through;
 }
